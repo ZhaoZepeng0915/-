@@ -30,7 +30,8 @@ class SatSetting(object):
         self.damper_r = 0
         self.cop = 4
         self.cost_sum_cur = 0
-        self.cost_sum_cur = 0
+        self.cost_fan_cur = 0
+        self.cost_cool_cur = 0
 
 
 
@@ -116,4 +117,5 @@ if __name__ == "__main__":
         sp_sat = aaa.setpoint_1()
     if mode == 0:
         sp_sat = aaa.setpoint_0()
+    # 送风温度限制
     aaa.data_output()
