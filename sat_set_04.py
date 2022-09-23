@@ -19,8 +19,7 @@ class SatSetting(object):
         self.n_zone = 15
         self.req_cool = 0
         self.sp_sat_alt = 0
-        self.cost = 0
-        self.power_cur
+        self.power_cur = 0
         self.r_ele = 1
         self.temp_r = 0
         self.temp_n = 0
@@ -30,6 +29,12 @@ class SatSetting(object):
         self.damper_n = 0
         self.damper_r = 0
         self.cop = 4
+        self.cost_sum_cur = 0
+        self.cost_fan_cur = 0
+        self.cost_cool_cur = 0
+        self.cost_sum_alt = 0
+        self.cost_fan_alt = 0
+        self.cost_cool_alt = 0
 
 
 
@@ -87,9 +92,11 @@ class SatSetting(object):
             sum_v_alt = sum(v_alt)
             sum_v_cur = sum(v_cur)
             p_alt = p_cur * (sum_v_alt / sum_v_cur)**3
+            c_fan_cur = self.r_ele * p_cur
             c_fan_alt = self.r_ele * p_alt
             self.sum_v_alt = sum_v_alt
             self.sum_v_cur = sum_v_cur
+            self.cost_fan_cur = c_fan_cur
             self.cost_fan_alt = c_fan_alt
             return self.cost_fan_alt
 
@@ -125,6 +132,8 @@ class SatSetting(object):
             vector_cost.append(cost_i)
 
         index_min = vector_cost.index(min(vector_cost))
+        self.cost_sum_cur =self.cost_cool_cur + self.cost_fan_cur
+        self.cost_sum_alt = vector_cost[index_min]
         self.sp_sat_alt = vector_sat[index_min]
         return self.sp_sat_alt
 
