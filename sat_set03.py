@@ -101,6 +101,13 @@ class SatSetting(object):
         cost_sum_cur = cost_fan_cur + cost_cool_cur
         self.cost_sum_cur = cost_sum_cur
 
+    # 对设定值进行限定：固定的上下限
+    def data_bound(self):
+        if self.sp_sat_alt > 18.3:
+            self.sp_sat_alt = 18.3
+        if self.sp_sat_alt < 11.6:
+            self.sp_sat_alt = 11.6
+
     # 设定值的输出：
     def data_output(self):
         qqq=1
@@ -117,5 +124,6 @@ if __name__ == "__main__":
         sp_sat = aaa.setpoint_1()
     if mode == 0:
         sp_sat = aaa.setpoint_0()
-    # 送风温度限制
+    # 对送风温度限制
+    aaa.data_bound()
     aaa.data_output()
