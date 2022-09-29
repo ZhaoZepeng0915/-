@@ -171,6 +171,6 @@ if __name__ == "__main__":
     # 检测训练模型的准确性,输出计算结果
     aaa.accuracy_test()
     # 给定输入值，预测送风量和冷量
-    # inputs = []
-    # result = aaa.query(inputs)
-    # print(result)
+    inputs = [26,22,22,26,20,22,20,20,20,20,20,20,20]
+    result = aaa.query(inputs)
+    print(result)
